@@ -29,16 +29,16 @@ bool CheckHanNumber(int number)
 
         pivot = number / (pow(10, cipher - 1));
         number %= (int)pow(10, cipher - 1);
-        differ = pivot - (number / (pow(10, cipher - 2)));
+        differ = pivot - floor(number / (pow(10, cipher - 2)));
 
-        for (int i = cipher - 2; i > 1; i--)
+        for (int i = cipher - 1; i > 1; i--)
         {
-            pivot = number / (pow(10, i));
-            if (differ != (pivot - (number / (pow(10, i - 1)))))
+            pivot = number / (pow(10, i - 1));
+            number %= (int)pow(10, i - 1);
+            if (differ != (pivot - floor(number / (pow(10, i - 2)))))
             {
                 return (false);
             }
-            number %= (int)pow(10, i);
         }
         return (true);
     }
